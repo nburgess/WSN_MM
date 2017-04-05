@@ -1,7 +1,7 @@
 
 class mapNode:
     def __init__(self):
-        self.types = -1
+        self.types = 8
         #0 = no wall
         #1 = wall
 

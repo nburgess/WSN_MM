@@ -2,6 +2,13 @@ import mapNode
 import sys
 
 class mapGlobal:
+    def getOptions(self):
+        array = [[0 for x in range(33)] for y in range(33)]
+        for i in range(0,33):
+            for j in range(0,33):
+                array[i][j]=self.Map[i][j].types
+
+        return array
 
     def __init__(self, w, h):
         self.w = w

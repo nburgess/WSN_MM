@@ -11,7 +11,7 @@ def main():
     our_map.initialize_map(input_file)
 
     second_map = our_map
-    second_map.getNode(5,10).options = 7
+    second_map.getNode(10,10).options = 7
 
     our_map.blend_map(second_map)
     our_map.print_map()
