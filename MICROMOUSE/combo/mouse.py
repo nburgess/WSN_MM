@@ -18,20 +18,20 @@ def main():
     #display mouse in core window/ create core object?
 #   start_core()
 
-    root = tkinter.Tk()
-    t = tkinter.Text(root, height= 500, width = 500)
+    root = Tkinter.Tk()
+    t = Tkinter.Text(root, height= 500, width = 500)
     t.pack()
     lst = [['1','b'],['a','b'],['3','4'],['5','6']]
     def forget():
-        t.delete("1.0",tkinter.END)
+        t.delete("1.0",Tkinter.END)
         root.after(0,work)
 
     def update(xOrg,yOrg):
         options = mouse.get_local_options()
         for x in options:
             #print(*x)
-            t.insert(tkinter.END,x)
-            t.insert(tkinter.END,'\n')
+            t.insert(Tkinter.END,x)
+            t.insert(Tkinter.END,'\n')
         our_map.getNode(xOrg,yOrg).types = 0
         root.after(100,forget)
 
