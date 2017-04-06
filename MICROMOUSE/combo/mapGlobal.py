@@ -21,10 +21,10 @@ class mapGlobal:
 
         return array
 
-    def __init__(self, w, h):
-        self.w = w
-        self.h = h
-        self.Map = [[mapNode.mapNode() for x in range(w)] for y in range(h)]
+    #def __init__(self, w, h):
+    #    self.w = w
+    #    self.h = h
+    #    self.Map = [[mapNode.mapNode() for x in range(w)] for y in range(h)]
 
     def getNode(self,x,y):
         return self.Map[x][y]
