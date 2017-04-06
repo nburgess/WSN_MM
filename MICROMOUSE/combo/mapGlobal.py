@@ -1,7 +1,18 @@
 import mapNode
 import sys
 
+//mapGlobal is the program that runs on core. It allows mice to communicate with it
+//in order to determine their current position and where they can move next
 class mapGlobal:
+
+    //when the mapGlobal program starts this function is called
+    def main():
+        print 'Starting global map'
+        w=33
+        h=33
+        input_file = "file.txt"
+        initialize_map(input_file)
+
     def getOptions(self):
         array = [[0 for x in range(33)] for y in range(33)]
         for i in range(0,33):
