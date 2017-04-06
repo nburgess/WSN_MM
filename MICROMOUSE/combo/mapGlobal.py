@@ -1,11 +1,11 @@
 import mapNode
 import sys
 
-//mapGlobal is the program that runs on core. It allows mice to communicate with it
-//in order to determine their current position and where they can move next
+#mapGlobal is the program that runs on core. It allows mice to communicate with it
+#in order to determine their current position and where they can move next
 class mapGlobal:
 
-    //when the mapGlobal program starts this function is called
+    #when the mapGlobal program starts this function is called
     def main():
         print 'Starting global map'
         w=33
