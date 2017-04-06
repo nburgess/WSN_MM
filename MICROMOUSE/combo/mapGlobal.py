@@ -7,7 +7,7 @@ class mapGlobal:
 
     #when the mapGlobal program starts this function is called
     def main():
-        print 'Starting global map'
+        print("Starting global map")
         w=33
         h=33
         input_file = "file.txt"
