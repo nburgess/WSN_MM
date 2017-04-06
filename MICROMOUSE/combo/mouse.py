@@ -3,7 +3,7 @@ import mapNode
 import sys
 
 import mapGlobal
-import tkinter
+import Tkinter
 from time import sleep
 def main():
     solution = False
