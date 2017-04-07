@@ -145,6 +145,35 @@ class mouse:
             print("stopped by wall")
                 #reverse
         #check if goal is found
+
+    #create a non-double list to be sent between mice
+    def generate_sendlist(self):
+        size = 1089
+        nodeList = [mapNode.mapNode() for x in range(size)];
+        count = 0
+        #x(up/down)
+        for i in range(0,33):
+            #y(left,right)
+            for j in range(0,33):
+                nodeList[count]=self.my_map.getNode(i,j)
+                count += 1
+        return nodeList
+
+    #takes incoming shared mouse map and combines it with my_map
+    def combine_map(self,nodeList):
+        count = 0
+        #x(up/down)
+        for i in range(0,33):
+            #y(left,right)
+            for j in range(0,33):
+                node = nodeList[count]
+                if self.my_map.getNode(i,j).types == 8:
+                    self.my_map.setNode(i,j,node)
+                if self.my_map.getNode(i,j).options < node.options:
+                    self.my_map.setNode(i,j,node)
+                count+=1
+
+
     #display mouse in core
     def send_data(self):
         do

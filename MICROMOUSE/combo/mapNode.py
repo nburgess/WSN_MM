@@ -4,6 +4,7 @@ class mapNode:
         self.types = 8
         #0 = no wall
         #1 = wall
+        #8 = undefined
 
         #options only matter if type=0
         self.options = 0
