@@ -1,7 +1,11 @@
 import mapNode
 import sys
 
+#mapGlobal is the program that runs on core. It allows mice to communicate with it
+#in order to determine their current position and where they can move next
 class mapGlobal:
+
+
     def getOptions(self):
         array = [[0 for x in range(33)] for y in range(33)]
         for i in range(0,33):
@@ -22,6 +26,7 @@ class mapGlobal:
         self.Map[x][y] = val
 
     def initialize_map(self,input_file):
+        print("Creating map...")
         with open(input_file, 'r') as f:
             return self.map_start(f)
 

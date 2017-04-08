@@ -2,18 +2,19 @@ import mouseNode
 import mapNode
 import sys
 
+import mouseGlobalConnector
 import mapGlobal
 import tkinter
 from time import sleep
 def main():
     solution = False
 
-    our_map = mapGlobal.mapGlobal(33,33)
-    input_file = "file.txt"
-    our_map.initialize_map(input_file)
+    #Set up a socket connection to the global map
+    global_map=mouseGlobalConnector.mouseGlobalConnector()
+    (x_pos,y_pos)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
-    mouse = mouseNode.mouse(int(sys.argv[1]),int(sys.argv[2]), 2)
+    mouse = mouseNode.mouse(x_pos,y_pos, 2,global_map)
 
     #display mouse in core window/ create core object?
 #   start_core()
@@ -22,6 +23,7 @@ def main():
     t = tkinter.Text(root, height= 500, width = 500)
     t.pack()
     lst = [['1','b'],['a','b'],['3','4'],['5','6']]
+    
     def forget():
         t.delete("1.0",tkinter.END)
         root.after(0,work)
@@ -32,7 +34,6 @@ def main():
             #print(*x)
             t.insert(tkinter.END,x)
             t.insert(tkinter.END,'\n')
-        our_map.getNode(xOrg,yOrg).types = 0
         root.after(100,forget)
 
 
@@ -45,15 +46,12 @@ def main():
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
 
-        our_map.getNode(xOrg,yOrg).types = 5
-        sensing = mouse.request_data(mouse.getXLoc(),mouse.getYLoc(),mouse.getDir(),our_map)
+        sensing = mouse.request_data(mouse.getDir())
         rotation, movement = mouse.next_step(sensing)
         print("{},{}".format(xOrg,yOrg))
         print("Forward {} Left {} Right {}".format(sensing[0].types, sensing[1].types, sensing[2].types))
         print ("Move {} Rotation {}".format(movement,rotation))
-        print(our_map.getNode(0,0).types)
         mouse.update_location(rotation,movement)
-        mouse.update_global(xOrg,yOrg,our_map)
         solution = mouse.check_goal(mouse.getXLoc(),mouse.getYLoc())
         if solution == False:
             root.after(0,update(xOrg,yOrg))
