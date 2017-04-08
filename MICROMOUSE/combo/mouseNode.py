@@ -1,12 +1,13 @@
 import mapNode
 import mapGlobal
+import mouseGlobalConnector
 
 class mouse:
     #anything here is shared by all instances
     w = 33
     h = 33
 
-    def __init__(self, xstart, ystart, dstart):
+    def __init__(self, xstart, ystart, dstart,globalConnector):
         self.posStack = []
         self.xloc = xstart
         self.yloc = ystart
@@ -16,6 +17,7 @@ class mouse:
             #1 right
             #2 down
             #3 left
+        self.globalConnector=globalConnector
         self.my_map = mapGlobal.mapGlobal(33,33)
         #Map[xstart][ystart].value = 1
 
@@ -34,19 +36,25 @@ class mouse:
 
     #get data about current cell from global map
     #update local map
-    def request_data(self,x,y,dir,map):
+    def request_data(self,dir):
         #get global map data
-        nodePacket = [map.getNode(x-1,y-1),map.getNode(x-1,y),map.getNode(x-1,y+1),
-                      map.getNode(x,y-1),map.getNode(x,y),map.getNode(x,y+1),
-                      map.getNode(x+1,y-1),map.getNode(x+1,y),map.getNode(x+1,y+1)]
+        #nodePacket = [map.getNode(x-1,y-1),map.getNode(x-1,y),map.getNode(x-1,y+1),
+        #              map.getNode(x,y-1),map.getNode(x,y),map.getNode(x,y+1),
+        #              map.getNode(x+1,y-1),map.getNode(x+1,y),map.getNode(x+1,y+1)]
         #update local map
-        count = 0
-        for i in range(-1,2):
-            for j in range(-1,2):
-                a = nodePacket[count]
-                self.my_map.setNode(x+i,y+j,a)
-                count += 1
-        #get sensing data from updated local map
+        #count = 0
+        #for i in range(-1,2):
+        #    for j in range(-1,2):
+        #        a = nodePacket[count]
+        #        self.my_map.setNode(x+i,y+j,a)
+        #        count += 1
+        x=self.xloc
+        y=self.yloc
+
+        #get sensing data from global map
+        (f_type,r_type,l_type)=self.globalConnector.lookAhead(dir)
+
+        #load data from the local map
         if dir==0:
             f = self.my_map.getNode(x-1,y)
             l = self.my_map.getNode(x,y-1)
@@ -63,6 +71,12 @@ class mouse:
             f = self.my_map.getNode(x,y-1)
             l = self.my_map.getNode(x+1,y)
             r = self.my_map.getNode(x-1,y)
+
+        #update the local map based on the data we loaded from the global map
+        f.types=f_type
+        l.types=l_type
+        r.types=r_type
+
         data = [f,l,r]
         return data
         #call core function here: should recieve visible data form global_map
@@ -115,10 +129,20 @@ class mouse:
             self.dir += 1
             if self.dir == 4:
                 self.dir = 0
+        elif rotation == 180:
+            self.dir +=2
+            if self.dir >=4:
+                self.dir-=4
         elif rotation == 0:
             pass
         else:
             print("Invalid rotation")
+
+        #move on the global map
+        print(str(self.dir)+":"+str(self.xloc)+","+str(self.yloc))
+        success=self.globalConnector.requestMovement(self.dir)
+        if success==0:
+            print("ERROR MOVING")
 
         #while movement != 0:
         if movement == 1:

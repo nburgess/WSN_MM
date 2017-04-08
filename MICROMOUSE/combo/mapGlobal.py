@@ -5,13 +5,6 @@ import sys
 #in order to determine their current position and where they can move next
 class mapGlobal:
 
-    #when the mapGlobal program starts this function is called
-    def main():
-        print("Starting global map")
-        w=33
-        h=33
-        input_file = "file.txt"
-        initialize_map(input_file)
 
     def getOptions(self):
         array = [[0 for x in range(33)] for y in range(33)]
@@ -21,10 +14,10 @@ class mapGlobal:
 
         return array
 
-    #def __init__(self, w, h):
-    #    self.w = w
-    #    self.h = h
-    #    self.Map = [[mapNode.mapNode() for x in range(w)] for y in range(h)]
+    def __init__(self, w, h):
+        self.w = w
+        self.h = h
+        self.Map = [[mapNode.mapNode() for x in range(w)] for y in range(h)]
 
     def getNode(self,x,y):
         return self.Map[x][y]
@@ -33,6 +26,7 @@ class mapGlobal:
         self.Map[x][y] = val
 
     def initialize_map(self,input_file):
+        print("Creating map...")
         with open(input_file, 'r') as f:
             return self.map_start(f)
 

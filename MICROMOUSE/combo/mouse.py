@@ -2,8 +2,9 @@ import mouseNode
 import mapNode
 import sys
 
+import mouseGlobalConnector
 import mapGlobal
-import Tkinter
+import tkinter
 from time import sleep
 def main():
     solution = False
@@ -12,26 +13,32 @@ def main():
     input_file = "file.txt"
     our_map.initialize_map(input_file)
 
+    global_map=mouseGlobalConnector.mouseGlobalConnector()
+    (x_pos,y_pos)=global_map.getInitialPosition()
+
     #create mouse using command line arguments as starting location
-    mouse = mouseNode.mouse(int(sys.argv[1]),int(sys.argv[2]), 2)
+    mouse = mouseNode.mouse(x_pos,y_pos, 2,global_map)
+
+    #sleep(30)
 
     #display mouse in core window/ create core object?
 #   start_core()
 
-    root = Tkinter.Tk()
-    t = Tkinter.Text(root, height= 500, width = 500)
+    root = tkinter.Tk()
+    t = tkinter.Text(root, height= 500, width = 500)
     t.pack()
     lst = [['1','b'],['a','b'],['3','4'],['5','6']]
+    
     def forget():
-        t.delete("1.0",Tkinter.END)
+        t.delete("1.0",tkinter.END)
         root.after(0,work)
 
     def update(xOrg,yOrg):
         options = mouse.get_local_options()
         for x in options:
             #print(*x)
-            t.insert(Tkinter.END,x)
-            t.insert(Tkinter.END,'\n')
+            t.insert(tkinter.END,x)
+            t.insert(tkinter.END,'\n')
         our_map.getNode(xOrg,yOrg).types = 0
         root.after(100,forget)
 
@@ -46,7 +53,8 @@ def main():
         yOrg = mouse.getYLoc()
 
         our_map.getNode(xOrg,yOrg).types = 5
-        sensing = mouse.request_data(mouse.getXLoc(),mouse.getYLoc(),mouse.getDir(),our_map)
+        sleep(1)
+        sensing = mouse.request_data(mouse.getDir())
         rotation, movement = mouse.next_step(sensing)
         print("{},{}".format(xOrg,yOrg))
         print("Forward {} Left {} Right {}".format(sensing[0].types, sensing[1].types, sensing[2].types))
