@@ -9,10 +9,6 @@ from time import sleep
 def main():
     solution = False
 
-    our_map = mapGlobal.mapGlobal(33,33)
-    input_file = "file.txt"
-    our_map.initialize_map(input_file)
-
     global_map=mouseGlobalConnector.mouseGlobalConnector()
     (x_pos,y_pos)=global_map.getInitialPosition()
 
@@ -39,7 +35,6 @@ def main():
             #print(*x)
             t.insert(tkinter.END,x)
             t.insert(tkinter.END,'\n')
-        our_map.getNode(xOrg,yOrg).types = 0
         root.after(100,forget)
 
 
@@ -52,16 +47,12 @@ def main():
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
 
-        our_map.getNode(xOrg,yOrg).types = 5
-        sleep(1)
         sensing = mouse.request_data(mouse.getDir())
         rotation, movement = mouse.next_step(sensing)
         print("{},{}".format(xOrg,yOrg))
         print("Forward {} Left {} Right {}".format(sensing[0].types, sensing[1].types, sensing[2].types))
         print ("Move {} Rotation {}".format(movement,rotation))
-        print(our_map.getNode(0,0).types)
         mouse.update_location(rotation,movement)
-        mouse.update_global(xOrg,yOrg,our_map)
         solution = mouse.check_goal(mouse.getXLoc(),mouse.getYLoc())
         if solution == False:
             root.after(0,update(xOrg,yOrg))
