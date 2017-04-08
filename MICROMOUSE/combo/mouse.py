@@ -9,13 +9,12 @@ from time import sleep
 def main():
     solution = False
 
+    #Set up a socket connection to the global map
     global_map=mouseGlobalConnector.mouseGlobalConnector()
     (x_pos,y_pos)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
     mouse = mouseNode.mouse(x_pos,y_pos, 2,global_map)
-
-    #sleep(30)
 
     #display mouse in core window/ create core object?
 #   start_core()

@@ -7,6 +7,9 @@ import socket
 # it accepts requests for movement and processes them
 class mouseGlobalConnector:
 
+    #This function will get the mouse's position from the global map
+    #it is usually only used when the program starts but can be called
+    #to get the position at any time
     def getInitialPosition(self):
        print("Fetching position")
        self.socket.send("start\n".encode())
@@ -17,6 +20,13 @@ class mouseGlobalConnector:
        y_pos=int(y_str)
        return (x_pos,y_pos)
 
+    #This function returns whether or not there is a wall to the front
+    #left and right of the mouse to help
+    #
+    # returns (f_val,r_val,l_val)
+    #   f_val=1 if wall in front
+    #   r_val=1 if wall to right
+    #   l_val=1 if wall to left
     def lookAhead(self,dir):
         print("Looking ahead")
         self.socket.send("sense\n".encode())
@@ -30,6 +40,14 @@ class mouseGlobalConnector:
         l_val=int(l_str)
         return (f_val,r_val,l_val)
 
+    #This function move the mouse one block in the indicated dirrection
+    #on the global map. If the function returns 0 there was a wall blocking
+    # the mouses' movement
+    #   0 up
+    #   1 right
+    #   2 down
+    #   3 left
+    #
     def requestMovement(self,dir):
         print("Requesting movement")
         self.socket.send("move\n".encode())
@@ -37,7 +55,9 @@ class mouseGlobalConnector:
         success_str=self.fetchLine()
         success=int(success_str)
         return success
-
+       
+    #This function fetches the next line of communication
+    # from the global map program
     def fetchLine(self):
         buffering = True
         while buffering:
@@ -51,6 +71,7 @@ class mouseGlobalConnector:
             else:
                 self.buffer += more
 
+          
     def __init__(self):
         print ("Setting up global connection")
         self.buffer=""

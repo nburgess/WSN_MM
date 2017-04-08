@@ -11,7 +11,8 @@ import mouseNodeServer
 class globalProgram:
 
 
-    #when the mapGlobal program starts this function is called
+    #This function creaes a copy of the global map, creates four mice,
+    # and then listen for communication requests from the mice
     def main():
         print("Starting global program")
 

@@ -9,7 +9,7 @@ import mouseNodeServer
 class globalClientThread(threading.Thread):
 
 
-    #Start the thread when a new client connects
+    #This function constantly checks for messages from the client
     def run(self):
         command=""
 
@@ -34,7 +34,8 @@ class globalClientThread(threading.Thread):
                 self.socket.send((str(success)+"\n").encode())
 
             
-        
+    #This function fetches the next line of communication
+    # from the global map program
     def fetchLine(self):
         buffering = True
         while buffering:
