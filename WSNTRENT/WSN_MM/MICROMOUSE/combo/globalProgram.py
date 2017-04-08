@@ -24,9 +24,9 @@ class globalProgram:
         #create four mice and set
         mouseCount=0
         mouse1=mouseNodeServer.mouse(1,1, 2,our_map)
-        mouse2=mouseNodeServer.mouse(32,1, 2,our_map)
-        mouse3=mouseNodeServer.mouse(1,32, 2,our_map)
-        mouse4=mouseNodeServer.mouse(32,32, 2,our_map)
+        mouse2=mouseNodeServer.mouse(31,1, 1,our_map)
+        mouse3=mouseNodeServer.mouse(1,31, 3,our_map)
+        mouse4=mouseNodeServer.mouse(31,31, 0,our_map)
 
         #set up a socket and listen for mice movement requests
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,7 +44,9 @@ class globalProgram:
                 mouse=mouse4
             (client_socket, address) = server_socket.accept()
             clientThread=globalClientThread.globalClientThread(client_socket,mouse)
-            clientThread.run()
+            print("Client oject created")
+            clientThread.start()
+            print("Client object started")
 
 
 

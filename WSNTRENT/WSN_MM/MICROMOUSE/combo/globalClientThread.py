@@ -18,8 +18,10 @@ class globalClientThread(threading.Thread):
             command=self.fetchLine()
             print(command)
             if command=="start":
+                print("Sending position")
                 self.socket.send((str(self.mouse.getXLoc())+"\n").encode())
                 self.socket.send((str(self.mouse.getYLoc())+"\n").encode())
+                self.socket.send((str(self.mouse.getDir())+"\n").encode())
             elif command=="sense":
                 dir_str=self.fetchLine()
                 dir=int(dir_str)
@@ -51,7 +53,9 @@ class globalClientThread(threading.Thread):
 
 
     def __init__(self,socket,mouse):
+        threading.Thread.__init__(self)
         self.socket=socket
         self.mouse=mouse
         self.buffer=''
+    
     

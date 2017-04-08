@@ -11,10 +11,10 @@ def main():
 
     #Set up a socket connection to the global map
     global_map=mouseGlobalConnector.mouseGlobalConnector()
-    (x_pos,y_pos)=global_map.getInitialPosition()
+    (x_pos,y_pos,dir)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
-    mouse = mouseNode.mouse(x_pos,y_pos, 2,global_map)
+    mouse = mouseNode.mouse(x_pos,y_pos, dir,global_map)
 
     #display mouse in core window/ create core object?
 #   start_core()
@@ -42,6 +42,7 @@ def main():
     #if solution != False:
     def work():
         #get sensing data(three distances, left, front,right)
+        sleep(5)
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
         sensing = mouse.request_data(mouse.getDir())

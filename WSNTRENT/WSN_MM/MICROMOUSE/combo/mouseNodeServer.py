@@ -37,6 +37,7 @@ class mouse:
     def request_data(self,dir):
         x=self.xloc
         y=self.yloc
+        print(str(x)+","+str(y)+"-"+str(dir))
 
         #get sensing data from updated local map
         if dir==0:
