@@ -43,7 +43,7 @@ class broadcastSendThread(threading.Thread):
             if self.production==0:
                 self.s.sendto(buffer.encode(), ('0.0.0.0', self.MYPORT))
             else:
-                self.s.sendto(buffer.encode(), ('176.16.0.255', self.MYPORT))
+                self.s.sendto(buffer.encode(), ('172.16.0.255', self.MYPORT))
 
 
 
