@@ -16,7 +16,7 @@ def main():
         print("Invalid arguments!")
         print("usage: mouse.py PRODUCTION_MODE (1=production,0=development")
         return
-    production=int(sys.argv[1)
+    production=int(sys.argv[1])
 
     if production==0:
         import tkinter
