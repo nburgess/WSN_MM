@@ -4,7 +4,10 @@ import sys
 
 import mouseGlobalConnector
 import mapGlobal
+import broadcastReceiveThread
+import broadcastSendThread
 import tkinter
+
 from time import sleep
 def main():
     solution = False
@@ -15,6 +18,14 @@ def main():
 
     #create mouse using command line arguments as starting location
     mouse = mouseNode.mouse(x_pos,y_pos, dir,global_map)
+
+    #set up the broadcast connection for the map
+    print("create broadcasters")
+    bSender=broadcastSendThread.broadcastSendThread(mouse)
+    bReceiver=broadcastReceiveThread.broadcastReceiveThread(mouse)
+    print("start broadcasters")
+    bSender.start()
+    bReceiver.start()
 
     #display mouse in core window/ create core object?
 #   start_core()
@@ -42,7 +53,7 @@ def main():
     #if solution != False:
     def work():
         #get sensing data(three distances, left, front,right)
-        #sleep(5)
+        sleep(5)
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
         sensing = mouse.request_data(mouse.getDir())
