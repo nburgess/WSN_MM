@@ -40,7 +40,7 @@ class broadcastSendThread(threading.Thread):
                 buffer+=str(optionList[x])
 
             #broadcast map
-            self.s.sendto(buffer.encode(), ('10.0.0.255', self.MYPORT))
+            self.s.sendto(buffer.encode(), ('0.0.0.0', self.MYPORT))
 
 
 
