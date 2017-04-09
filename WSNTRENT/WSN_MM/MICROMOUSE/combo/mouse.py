@@ -23,14 +23,14 @@ def main():
 
     #Set up a socket connection to the global map
     global_map=mouseGlobalConnector.mouseGlobalConnector(production)
-    (x_pos,y_pos,dir)=global_map.getInitialPosition()
+    (number,x_pos,y_pos,dir)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
-    mouse = mouseNode.mouse(x_pos,y_pos, dir,global_map)
+    mouse = mouseNode.mouse(x_pos,y_pos, dir,number,global_map)
 
     #set up the broadcast connection for the map
     print("create broadcasters")
-    bSender=broadcastSendThread.broadcastSendThread(mouse)
+    bSender=broadcastSendThread.broadcastSendThread(mouse,production)
     bReceiver=broadcastReceiveThread.broadcastReceiveThread(mouse)
     print("start broadcasters")
     bSender.start()

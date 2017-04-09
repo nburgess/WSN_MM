@@ -20,7 +20,9 @@ class mouse:
         self.my_map = map
         self.number=str(number)
         #Map[xstart][ystart].value = 1
-
+     
+    def getNumber(self):
+        return self.number
     def getXLoc(self):
         return self.xloc
     def getYLoc(self):

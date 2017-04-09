@@ -16,14 +16,16 @@ class mouseGlobalConnector:
     def getInitialPosition(self):
        print("Fetching position")
        self.socket.send("start\n".encode())
+       number_str=self.fetchLine()
        x_str=self.fetchLine()
        y_str=self.fetchLine()
        dir_str=self.fetchLine()
        print("("+x_str+","+y_str+")")
+       number=int(number_str)
        x_pos=int(x_str)
        y_pos=int(y_str)
        dir=int(dir_str)
-       return (x_pos,y_pos,dir)
+       return (number,x_pos,y_pos,dir)
 
     #This function returns whether or not there is a wall to the front
     #left and right of the mouse to help

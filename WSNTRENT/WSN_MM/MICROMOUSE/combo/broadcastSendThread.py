@@ -40,14 +40,18 @@ class broadcastSendThread(threading.Thread):
                 buffer+=str(optionList[x])
 
             #broadcast map
-            self.s.sendto(buffer.encode(), ('0.0.0.255', self.MYPORT))
+            if production==0:
+                self.s.sendto(buffer.encode(), ('0.0.0.0', self.MYPORT))
+            else:
+                self.s.sendto(buffer.encode(), ('176.16.0.255', self.MYPORT))
 
 
 
 
-    def __init__(self,mouse):
+    def __init__(self,mouse,production):
         threading.Thread.__init__(self)
         self.mouse=mouse
+        self.production=production
 
         self.s = socket(AF_INET, SOCK_DGRAM)
         self.s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
