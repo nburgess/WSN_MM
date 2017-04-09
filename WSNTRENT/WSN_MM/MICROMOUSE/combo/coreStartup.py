@@ -6,6 +6,7 @@ import mouseNode
 from time import sleep
 from socket import *
 from subprocess import call
+import coreStartup
 
 # This class is in charge of broadcasting the map to all other mice in the maze
 class coreStartup(threading.Thread):
