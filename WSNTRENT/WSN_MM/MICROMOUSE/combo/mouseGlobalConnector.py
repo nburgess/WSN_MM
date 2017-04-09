@@ -15,10 +15,12 @@ class mouseGlobalConnector:
        self.socket.send("start\n".encode())
        x_str=self.fetchLine()
        y_str=self.fetchLine()
+       dir_str=self.fetchLine()
        print("("+x_str+","+y_str+")")
        x_pos=int(x_str)
        y_pos=int(y_str)
-       return (x_pos,y_pos)
+       dir=int(dir_str)
+       return (x_pos,y_pos,dir)
 
     #This function returns whether or not there is a wall to the front
     #left and right of the mouse to help
