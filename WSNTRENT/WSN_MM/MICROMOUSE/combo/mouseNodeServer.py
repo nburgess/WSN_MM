@@ -19,7 +19,7 @@ class mouse:
             #2 down
             #3 left
         self.my_map = map
-        self.number=str(number)
+        self.number=int(number)
         #Map[xstart][ystart].value = 1
      
     def getNumber(self):
