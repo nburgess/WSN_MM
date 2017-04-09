@@ -37,7 +37,7 @@ class globalProgram:
         mouse4=mouseNodeServer.mouse(31,31, 0,our_map,4)
 
         #startup core
-        core=coreStartup.coreStartup(production)
+        core=coreStartup.coreStartup(production,0)
         core.start()
 
         #set up a socket and listen for mice movement requests
