@@ -6,7 +6,6 @@ import mouseGlobalConnector
 import mapGlobal
 import broadcastReceiveThread
 import broadcastSendThread
-import tkinter
 
 from time import sleep
 def main():
@@ -17,9 +16,13 @@ def main():
         print("Invalid arguments!")
         print("usage: mouse.py PRODUCTION_MODE (1=production,0=development")
         return
+    production=int(sys.argv[1)
+
+    if production==0:
+        import tkinter
 
     #Set up a socket connection to the global map
-    global_map=mouseGlobalConnector.mouseGlobalConnector(sys.argv[1])
+    global_map=mouseGlobalConnector.mouseGlobalConnector(production)
     (x_pos,y_pos,dir)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
@@ -36,21 +39,24 @@ def main():
     #display mouse in core window/ create core object?
 #   start_core()
 
-    root = tkinter.Tk()
-    t = tkinter.Text(root, height= 500, width = 500)
-    t.pack()
+    if production==0:
+        root = tkinter.Tk()
+        t = tkinter.Text(root, height= 500, width = 500)
+        t.pack()
 
     def forget():
-        t.delete("1.0",tkinter.END)
-        root.after(0,work)
+        if production==0:
+            t.delete("1.0",tkinter.END)
+            root.after(0,work)
 
     def update(xOrg,yOrg):
-        options = mouse.get_local_options()
-        for x in options:
-            #print(*x)
-            t.insert(tkinter.END,x)
-            t.insert(tkinter.END,'\n')
-        root.after(100,forget)
+        if production==0:
+            options = mouse.get_local_options()
+            for x in options:
+                #print(*x)
+                t.insert(tkinter.END,x)
+                t.insert(tkinter.END,'\n')
+            root.after(100,forget)
 
 
 
@@ -69,10 +75,14 @@ def main():
         print ("Move {} Rotation {}".format(movement,rotation))
         mouse.update_location(rotation,movement)
         solution = mouse.check_goal(mouse.getXLoc(),mouse.getYLoc())
-        if solution == False:
+        if solution == False and production==0:
             root.after(0,update(xOrg,yOrg))
-    root.after(1000,work)
-    root.mainloop()
+    if production==0:
+        root.after(1000,work)
+        root.mainloop()
+    else:
+        while 1:
+            work()
         #if(rotation,movement) run_active = False
 #        if rotation == -90:
 
