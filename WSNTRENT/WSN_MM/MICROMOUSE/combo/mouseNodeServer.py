@@ -6,6 +6,7 @@ class mouse:
     #anything here is shared by all instances
     w = 33
     h = 33
+    NODE_OFFSET=1 #The offset that should be added to the mouse number (eg. offset of one means the first mouse in core is node2)
 
     def __init__(self, xstart, ystart, dstart,map,number):
         self.posStack = []
@@ -87,6 +88,6 @@ class mouse:
         else:
             self.xloc=newX
             self.yloc=newY
-            call("coresendmsg node number="+self.number+" xpos="+str(newY*25-12)+" ypos="+str(newX*25-12), shell=True)
+            call("coresendmsg node number="+str(self.number+self.NODE_OFFSET)+" xpos="+str(newY*25-12)+" ypos="+str(newX*25-12), shell=True)
             return 1
       

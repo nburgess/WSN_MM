@@ -5,6 +5,7 @@ import mapGlobal
 import globalClientThread
 import globalProgram
 import mouseNodeServer
+import coreStartup
 
 #The global program is in charge of managing the globalMap object and
 # listening for requests from the mice for movement informaiton
@@ -15,6 +16,13 @@ class globalProgram:
     # and then listen for communication requests from the mice
     def main():
         print("Starting global program")
+
+        #check to make sure we have the right number of arguments
+        if len(sys.argv)!=2:
+            print("Invalid arguments!")
+            print("usage: mouse.py PRODUCTION_MODE (1=production,0=development")
+            return
+        production=int(sys.argv[1])
 
         #Create the global map we will use to check for movement paths
         our_map = mapGlobal.mapGlobal(33,33)
@@ -27,6 +35,10 @@ class globalProgram:
         mouse2=mouseNodeServer.mouse(31,1, 1,our_map,2)
         mouse3=mouseNodeServer.mouse(1,31, 3,our_map,3)
         mouse4=mouseNodeServer.mouse(31,31, 0,our_map,4)
+
+        #startup core
+        core=coreStartup.coreStartup(production)
+        core.start()
 
         #set up a socket and listen for mice movement requests
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
