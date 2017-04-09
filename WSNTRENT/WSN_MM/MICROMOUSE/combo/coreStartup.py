@@ -17,13 +17,13 @@ class coreStartup(threading.Thread):
         if self.production==1:
             call("core-gui /home/core/code/coreConfig/default.xml", shell=True)
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=2 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1')
+            call("coresendmsg exec node=2 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=3 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1')
+            call("coresendmsg exec node=3 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=4 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1')
+            call("coresendmsg exec node=4 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=5 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1')
+            call("coresendmsg exec node=5 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             
 
 
