@@ -23,14 +23,14 @@ class globalProgram:
 
         #create four mice and set
         mouseCount=0
-        mouse1=mouseNodeServer.mouse(1,1, 2,our_map)
-        mouse2=mouseNodeServer.mouse(31,1, 1,our_map)
-        mouse3=mouseNodeServer.mouse(1,31, 3,our_map)
-        mouse4=mouseNodeServer.mouse(31,31, 0,our_map)
+        mouse1=mouseNodeServer.mouse(1,1, 2,our_map,1)
+        mouse2=mouseNodeServer.mouse(31,1, 1,our_map,2)
+        mouse3=mouseNodeServer.mouse(1,31, 3,our_map,3)
+        mouse4=mouseNodeServer.mouse(31,31, 0,our_map,4)
 
         #set up a socket and listen for mice movement requests
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind(("127.0.0.1", 1337))
+        server_socket.bind(("0.0.0.0", 1337))
         server_socket.listen(5)
         while 1:
             mouseCount+=1

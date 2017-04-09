@@ -7,6 +7,9 @@ import socket
 # it accepts requests for movement and processes them
 class mouseGlobalConnector:
 
+    development_ip="127.0.0.1"
+    production_ip="172.16.0.254"
+
     #This function will get the mouse's position from the global map
     #it is usually only used when the program starts but can be called
     #to get the position at any time
@@ -74,8 +77,11 @@ class mouseGlobalConnector:
                 self.buffer += more
 
 
-    def __init__(self):
+    def __init__(self,production):
         print ("Setting up global connection")
         self.buffer=""
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.connect(("127.0.0.1", 1337))
+        if production==1:
+            self.socket.connect((self.production_ip, 1337))
+        else:
+            self.socket.connect((self.development_ip, 1337))

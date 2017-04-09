@@ -1,12 +1,13 @@
 import mapNode
 import mapGlobal
+from subprocess import call
 
 class mouse:
     #anything here is shared by all instances
     w = 33
     h = 33
 
-    def __init__(self, xstart, ystart, dstart,map):
+    def __init__(self, xstart, ystart, dstart,map,number):
         self.posStack = []
         self.xloc = xstart
         self.yloc = ystart
@@ -17,6 +18,7 @@ class mouse:
             #2 down
             #3 left
         self.my_map = map
+        self.number=str(number)
         #Map[xstart][ystart].value = 1
 
     def getXLoc(self):
@@ -83,5 +85,6 @@ class mouse:
         else:
             self.xloc=newX
             self.yloc=newY
+            call("coresendmsg node number="+self.number+" xpos="+str(newX)+" ypos="+str(newY), shell=True)
             return 1
       

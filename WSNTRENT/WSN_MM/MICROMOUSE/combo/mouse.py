@@ -12,8 +12,14 @@ from time import sleep
 def main():
     solution = False
 
+    #check to make sure we have the right number of arguments
+    if len(sys.argv)!=2:
+        print("Invalid arguments!")
+        print("usage: mouse.py PRODUCTION_MODE (1=production,0=development")
+        return
+
     #Set up a socket connection to the global map
-    global_map=mouseGlobalConnector.mouseGlobalConnector()
+    global_map=mouseGlobalConnector.mouseGlobalConnector(sys.argv[1])
     (x_pos,y_pos,dir)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
