@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scenario>
+  <NetworkPlan>
+    <NetworkDefinition id="5" name="wlan5" type="WlanNode">
+      <model name="basic_range" type="wireless">
+        <range>1433.8235294117646</range>
+        <bandwidth>54000000</bandwidth>
+        <jitter>0</jitter>
+        <delay>20000</delay>
+        <error>0</error>
+      </model>
+    </NetworkDefinition>
+    <Node id="1" name="n1" type="router">
+      <interface name="eth0" net="wlan5">
+        <address type="mac">00:00:00:aa:00:00</address>
+        <address>10.0.0.1/32</address>
+        <address>2001::1/128</address>
+      </interface>
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="2" name="n2" type="router">
+      <interface name="eth0" net="wlan5">
+        <address type="mac">00:00:00:aa:00:01</address>
+        <address>10.0.0.2/32</address>
+        <address>2001::2/128</address>
+      </interface>
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="3" name="n3" type="router">
+      <interface name="eth0" net="wlan5">
+        <address type="mac">00:00:00:aa:00:02</address>
+        <address>10.0.0.3/32</address>
+        <address>2001::3/128</address>
+      </interface>
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="4" name="n4" type="router">
+      <interface name="eth0" net="wlan5">
+        <address type="mac">00:00:00:aa:00:03</address>
+        <address>10.0.0.4/32</address>
+        <address>2001::4/128</address>
+      </interface>
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="6" name="n1" type="router"/>
+    <Node id="7" name="n5" type="router">
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="8" name="n2" type="router"/>
+    <Node id="9" name="n5" type="router">
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="10" name="n3" type="router"/>
+    <Node id="11" name="n5" type="router">
+      <param name="canvas" value="2"/>
+    </Node>
+    <Node id="12" name="n4" type="router"/>
+    <Node id="13" name="n5" type="router">
+      <param name="canvas" value="2"/>
+    </Node>
+  </NetworkPlan>
+  <MotionPlan>
+    <origin alt="2.0" lat="47.5791667" lon="-122.132322" scale100="150.0"/>
+    <Node name="wlan5">
+      <motion type="stationary">
+        <point>362,153</point>
+      </motion>
+    </Node>
+    <Node name="n1">
+      <motion type="stationary">
+        <point>328,262</point>
+      </motion>
+    </Node>
+    <Node name="n2">
+      <motion type="stationary">
+        <point>408,256</point>
+      </motion>
+    </Node>
+    <Node name="n3">
+      <motion type="stationary">
+        <point>316,342</point>
+      </motion>
+    </Node>
+    <Node name="n4">
+      <motion type="stationary">
+        <point>410,345</point>
+      </motion>
+    </Node>
+    <Node name="n1">
+      <motion type="stationary">
+        <point>328,262</point>
+      </motion>
+    </Node>
+    <Node name="n5">
+      <motion type="stationary">
+        <point>362,153</point>
+      </motion>
+    </Node>
+    <Node name="n2">
+      <motion type="stationary">
+        <point>408,256</point>
+      </motion>
+    </Node>
+    <Node name="n5">
+      <motion type="stationary">
+        <point>362,153</point>
+      </motion>
+    </Node>
+    <Node name="n3">
+      <motion type="stationary">
+        <point>316,342</point>
+      </motion>
+    </Node>
+    <Node name="n5">
+      <motion type="stationary">
+        <point>362,153</point>
+      </motion>
+    </Node>
+    <Node name="n4">
+      <motion type="stationary">
+        <point>410,345</point>
+      </motion>
+    </Node>
+    <Node name="n5">
+      <motion type="stationary">
+        <point>362,153</point>
+      </motion>
+    </Node>
+  </MotionPlan>
+  <ServicePlan>
+    <Node type="router">
+      <Service name="zebra"/>
+      <Service name="OSPFv2"/>
+      <Service name="OSPFv3"/>
+      <Service name="vtysh"/>
+      <Service name="IPForward"/>
+    </Node>
+  </ServicePlan>
+  <CoreMetaData>
+    <SessionOptions>
+      <param name="controlnet">172.16.0.0/24</param>
+    </SessionOptions>
+    <MetaData>
+      <param name="global_options">interface_names=no ip_addresses=yes ipv6_addresses=yes node_labels=yes link_labels=yes show_api=no background_images=no annotations=yes grid=yes traffic_start=0</param>
+      <param name="canvas c1">{name {Canvas1}}</param>
+      <param name="canvas c2">{name {Canvas2}}</param>
+    </MetaData>
+  </CoreMetaData>
+</Scenario>

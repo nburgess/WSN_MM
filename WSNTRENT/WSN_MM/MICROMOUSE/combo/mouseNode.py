@@ -7,7 +7,7 @@ class mouse:
     w = 33
     h = 33
 
-    def __init__(self, xstart, ystart, dstart,globalConnector):
+    def __init__(self, xstart, ystart, dstart,number,globalConnector):
         self.posStack = []
         self.xloc = xstart
         self.yloc = ystart
@@ -17,6 +17,7 @@ class mouse:
             #1 right
             #2 down
             #3 left
+        self.number=number
         self.globalConnector=globalConnector
         self.my_map = mapGlobal.mapGlobal(33,33)
         #Map[xstart][ystart].value = 1

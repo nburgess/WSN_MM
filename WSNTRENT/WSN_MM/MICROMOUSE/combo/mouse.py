@@ -4,36 +4,59 @@ import sys
 
 import mouseGlobalConnector
 import mapGlobal
-import tkinter
+import broadcastReceiveThread
+import broadcastSendThread
+
 from time import sleep
 def main():
     solution = False
 
+    #check to make sure we have the right number of arguments
+    if len(sys.argv)!=2:
+        print("Invalid arguments!")
+        print("usage: mouse.py PRODUCTION_MODE (1=production,0=development")
+        return
+    production=int(sys.argv[1])
+
+    if production==0:
+        import tkinter
+
     #Set up a socket connection to the global map
-    global_map=mouseGlobalConnector.mouseGlobalConnector()
-    (x_pos,y_pos,dir)=global_map.getInitialPosition()
+    global_map=mouseGlobalConnector.mouseGlobalConnector(production)
+    (number,x_pos,y_pos,dir)=global_map.getInitialPosition()
 
     #create mouse using command line arguments as starting location
-    mouse = mouseNode.mouse(x_pos,y_pos, dir,global_map)
+    mouse = mouseNode.mouse(x_pos,y_pos, dir,number,global_map)
+
+    #set up the broadcast connection for the map
+    print("create broadcasters")
+    bSender=broadcastSendThread.broadcastSendThread(mouse,production)
+    bReceiver=broadcastReceiveThread.broadcastReceiveThread(mouse)
+    print("start broadcasters")
+    bSender.start()
+    bReceiver.start()
 
     #display mouse in core window/ create core object?
 #   start_core()
 
-    root = tkinter.Tk()
-    t = tkinter.Text(root, height= 500, width = 500)
-    t.pack()
+    if production==0:
+        root = tkinter.Tk()
+        t = tkinter.Text(root, height= 500, width = 500)
+        t.pack()
 
     def forget():
-        t.delete("1.0",tkinter.END)
-        root.after(0,work)
+        if production==0:
+            t.delete("1.0",tkinter.END)
+            root.after(0,work)
 
     def update(xOrg,yOrg):
-        options = mouse.get_local_options()
-        for x in options:
-            #print(*x)
-            t.insert(tkinter.END,x)
-            t.insert(tkinter.END,'\n')
-        root.after(100,forget)
+        if production==0:
+            options = mouse.get_local_options()
+            for x in options:
+                #print(*x)
+                t.insert(tkinter.END,x)
+                t.insert(tkinter.END,'\n')
+            root.after(100,forget)
 
 
 
@@ -42,7 +65,7 @@ def main():
     #if solution != False:
     def work():
         #get sensing data(three distances, left, front,right)
-        #sleep(5)
+        sleep(5)
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
         sensing = mouse.request_data(mouse.getDir())
@@ -52,10 +75,14 @@ def main():
         print ("Move {} Rotation {}".format(movement,rotation))
         mouse.update_location(rotation,movement)
         solution = mouse.check_goal(mouse.getXLoc(),mouse.getYLoc())
-        if solution == False:
+        if solution == False and production==0:
             root.after(0,update(xOrg,yOrg))
-    root.after(1000,work)
-    root.mainloop()
+    if production==0:
+        root.after(1000,work)
+        root.mainloop()
+    else:
+        while 1:
+            work()
         #if(rotation,movement) run_active = False
 #        if rotation == -90:
 

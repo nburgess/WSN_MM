@@ -19,6 +19,7 @@ class globalClientThread(threading.Thread):
             print(command)
             if command=="start":
                 print("Sending position")
+                self.socket.send((str(self.mouse.getNumber())+"\n").encode())
                 self.socket.send((str(self.mouse.getXLoc())+"\n").encode())
                 self.socket.send((str(self.mouse.getYLoc())+"\n").encode())
                 self.socket.send((str(self.mouse.getDir())+"\n").encode())
