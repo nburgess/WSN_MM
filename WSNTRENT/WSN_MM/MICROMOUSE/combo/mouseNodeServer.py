@@ -87,6 +87,6 @@ class mouse:
         else:
             self.xloc=newX
             self.yloc=newY
-            call("coresendmsg node number="+self.number+" xpos="+str(newY*10)+" ypos="+str(newX*10), shell=True)
+            call("coresendmsg node number="+self.number+" xpos="+str(newY*25-12)+" ypos="+str(newX*25-12), shell=True)
             return 1
       
