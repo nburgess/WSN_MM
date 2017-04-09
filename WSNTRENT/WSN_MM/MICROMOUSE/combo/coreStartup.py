@@ -24,9 +24,6 @@ class coreStartupObj(threading.Thread):
             else:
                 
                 sleep(self.COMMAND_DELAY)
-                print("Testing")
-                call("coresendmsg node number=2 xpos=1 ypos=1", shell=True)
-                sleep(self.COMMAND_DELAY)
                 print("Starting node 1...")
                 call("coresendmsg exec node=2 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'", shell=True)
                 sleep(self.COMMAND_DELAY)
