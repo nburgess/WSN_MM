@@ -22,6 +22,9 @@ class coreStartupObj(threading.Thread):
                 core2.start()
                 call("core-gui /home/core/code/coreConfig/default.xml", shell=True)
             else:
+                print("Testing")
+                sleep(self.COMMAND_DELAY)
+                call("coresendmsg exec node=2 num=1001 cmd='echo 5'")
                 sleep(self.COMMAND_DELAY)
                 print("Starting node 1...")
                 call("coresendmsg exec node=2 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
