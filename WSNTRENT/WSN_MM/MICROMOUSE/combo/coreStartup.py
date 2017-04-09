@@ -15,15 +15,20 @@ class coreStartup(threading.Thread):
     #This function broadcasts a copy of the map every WAIT_TO_SEND seconds
     def run(self):
         if self.production==1:
+            print("Starting core...")
             call("core-gui /home/core/code/coreConfig/default.xml", shell=True)
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=2 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
+            print("Starting node 1...")
+            call("coresendmsg exec node=2 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=3 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
+            print("Starting node 2...")
+            call("coresendmsg exec node=3 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=4 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
+            print("Starting node 3...")
+            call("coresendmsg exec node=4 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             sleep(COMMAND_DELAY)
-            call("coresendmsg exec node=5 num=1001 cmd='/home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
+            print("Starting node 4...")
+            call("coresendmsg exec node=5 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'")
             
 
 
