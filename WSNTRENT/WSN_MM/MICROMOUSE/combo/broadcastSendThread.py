@@ -40,7 +40,7 @@ class broadcastSendThread(threading.Thread):
                 buffer+=str(optionList[x])
 
             #broadcast map
-            self.s.sendto(buffer.encode(), ('<broadcast>', self.MYPORT))
+            self.s.sendto(buffer.encode(), ('10.0.0.255', self.MYPORT))
 
 
 
@@ -51,7 +51,7 @@ class broadcastSendThread(threading.Thread):
 
         self.s = socket(AF_INET, SOCK_DGRAM)
         self.s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-        self.s.bind(('10.0.0.255', self.MYPORT))
+        #self.s.bind(('10.0.0.255', self.MYPORT))
         self.s.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
     
     
