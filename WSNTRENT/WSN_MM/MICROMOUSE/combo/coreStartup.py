@@ -18,11 +18,14 @@ class coreStartupObj(threading.Thread):
         if self.production==1:
             if self.step==0:
                 print("Starting core...")
-                core2=coreStartup.coreStartupObj(self.production,self.step+1)
+                core2=coreStartup.coreStartupObj(self.production,self.step+1,self.image_file)
                 core2.start()
                 call("core-gui /home/core/code/coreConfig/default.xml", shell=True)
             else:
-                
+                sleep(self.COMMAND_DELAY)
+                print("Setting background...")
+                call("coresendmsg node number=1 xpos=195 ypos=195, shell=True)
+                call("coresendmsg node number=1 icon=/home/core/code/mazeFiles/"+self.image_file, shell=True)
                 sleep(self.COMMAND_DELAY)
                 print("Starting node 1...")
                 call("coresendmsg exec node=2 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'", shell=True)
@@ -40,10 +43,11 @@ class coreStartupObj(threading.Thread):
 
 
 
-    def __init__(self,production,step):
+    def __init__(self,production,step,image_file):
         threading.Thread.__init__(self)
         self.production=production
         self.step=step
+        self.image_file=image_file
 
     
     

@@ -88,8 +88,8 @@ class mouse:
         else:
             self.xloc=newX
             self.yloc=newY
-            newX2=newX*25-12
-            newY2=newY*25-12
+            newX2=newX*24-12
+            newY2=newY*24-12
             nodeNum=self.number+self.NODE_OFFSET
             call("coresendmsg node number="+str(nodeNum)+" xpos="+str(newY2)+" ypos="+str(newX2), shell=True)
             return 1
