@@ -69,7 +69,7 @@ def main():
     #if solution != False:
     def work():
         #get sensing data(three distances, left, front,right)
-        sleep(5)
+        sleep(1)
 	#sleep(0.8) #dely for
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
