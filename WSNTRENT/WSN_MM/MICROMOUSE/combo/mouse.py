@@ -1,7 +1,6 @@
 import mouseNode
 import mapNode
 import sys
-import simplejson as json
 import mouseGlobalConnector
 import mapGlobal
 import broadcastReceiveThread
@@ -20,7 +19,7 @@ def main():
     production=int(sys.argv[1])
 
     if production==0:
-        import Tkinter
+        import tkinter
 
     #Set up a socket connection to the global map
     global_map=mouseGlobalConnector.mouseGlobalConnector(production)
@@ -30,7 +29,7 @@ def main():
     mouse = mouseNode.mouse(x_pos,y_pos, dir,number,global_map)
 
     #start sending data via json
-    jsonObj=jsonSender.jsonSender(mouse)
+    jsonObj=jsonSender.jsonSender(mouse,global_map)
     jsonObj.start()
 
     #set up the broadcast connection for the map
@@ -45,13 +44,13 @@ def main():
 #   start_core()
 
     if production==0:
-        root = Tkinter.Tk()
-        t = Tkinter.Text(root, height= 500, width = 500)
+        root = tkinter.Tk()
+        t = tkinter.Text(root, height= 500, width = 500)
         t.pack()
 
     def forget():
         if production==0:
-            t.delete("1.0",Tkinter.END)
+            t.delete("1.0",tkinter.END)
             root.after(0,work)
 
     def update(xOrg,yOrg):
@@ -59,8 +58,8 @@ def main():
             options = mouse.get_local_options()
             for x in options:
                 #print(*x)
-                t.insert(Tkinter.END,x)
-                t.insert(Tkinter.END,'\n')
+                t.insert(tkinter.END,x)
+                t.insert(tkinter.END,'\n')
             root.after(100,forget)
 
 
@@ -71,7 +70,7 @@ def main():
     def work():
         #get sensing data(three distances, left, front,right)
         sleep(5)
-	sleep(0.8) #dely for mouse
+	#sleep(0.8) #dely for
         xOrg = mouse.getXLoc()
         yOrg = mouse.getYLoc()
         sensing = mouse.request_data(mouse.getDir())
