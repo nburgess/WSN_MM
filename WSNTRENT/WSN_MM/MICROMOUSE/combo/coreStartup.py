@@ -29,6 +29,7 @@ class coreStartupObj(threading.Thread):
                 sleep(self.COMMAND_DELAY)
                 print("Starting node 1...")
                 call("coresendmsg exec node=1 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'", shell=True)
+                call("coresendmsg node number=1 icon=/home/core/code/coreConfig/car.png", shell=True)
                 sleep(self.COMMAND_DELAY)
                 print("Starting node 2...")
                 call("coresendmsg exec node=2 num=1001 cmd='python /home/core/code/WSNTRENT/WSN_MM/MICROMOUSE/combo/mouse.py 1'", shell=True)
