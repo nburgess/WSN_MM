@@ -22,6 +22,9 @@ class mouse:
         self.my_map = mapGlobal.mapGlobal(33,33)
         #Map[xstart][ystart].value = 1
 
+    def getNumber(self):
+	return self.number
+
     def getXLoc(self):
         return self.xloc
     def getYLoc(self):
