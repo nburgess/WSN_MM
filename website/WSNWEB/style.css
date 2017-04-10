@@ -1,0 +1,45 @@
+
+.button {
+     background-color:white;
+     width: 160px;
+     margin:0 auto;
+}
+
+.row{
+    clear:both;
+}
+
+#cell{
+    width:50px;
+    height:50px;
+    border:2px solid black;
+    float: left;
+}
+
+#banner {
+    top: 0;
+    left: 0;
+    background-color: #E6E6FA;
+    width: 100%;
+}
+
+#banner-content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #000;
+}
+#nav {
+	margin:0;
+	padding:0;
+	background:#808259 url(nav_bg.jpg) 0 0 repeat-x;
+	float:left;
+	width:100%;
+	border:1px solid #42432d;
+	border-width:1px 0;
+}
+#nav li {
+	display:inline;
+	padding:0;
+	margin:0;
+}
