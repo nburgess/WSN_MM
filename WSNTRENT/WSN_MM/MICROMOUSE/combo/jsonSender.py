@@ -14,7 +14,7 @@ class jsonSender(threading.Thread):
 
     MYPORT = 50000 #port that we will send data to
     MAP_SIZE=1089 #33 x 33
-    WAIT_TO_SEND=10 #time delay between each map send
+    WAIT_TO_SEND=60 #time delay between each map send
 
     #This function broadcasts a copy of the map every WAIT_TO_SEND seconds
     def run(self):
