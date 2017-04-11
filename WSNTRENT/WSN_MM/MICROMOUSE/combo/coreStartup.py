@@ -20,7 +20,7 @@ class coreStartupObj(threading.Thread):
                 print("Starting core...")
                 core2=coreStartup.coreStartupObj(self.production,self.step+1,self.image_file)
                 core2.start()
-                call("core-gui /home/core/code/coreConfig/default.xml", shell=True)
+                call("core-gui /home/core/code/coreConfig/default_v2.xml", shell=True)
             else:
                 sleep(self.COMMAND_DELAY)
                 print("Setting background...")
