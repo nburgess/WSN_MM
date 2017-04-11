@@ -1,6 +1,9 @@
 <?php
 	$con = mysqli_connect("localhost","MM","mm","MM");
 	
+	$map_datas4=mysqli_query($con,"SELECT line FROM network_data") or die("ERROR");
+
+	
 	$map_datas1=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=1 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");
 	$map_datas2=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=2 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");
 	$map_datas3=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=3 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");

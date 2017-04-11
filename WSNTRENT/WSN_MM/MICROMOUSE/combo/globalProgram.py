@@ -18,16 +18,18 @@ class globalProgram:
         print("Starting global program")
 
         #check to make sure we have the right number of arguments
-        if len(sys.argv)!=4:
+        if len(sys.argv)!=5:
             print("Invalid arguments!")
-            print("usage: mouse.py PRODUCTION_MODE MAZE_TEXT_FILE MAZE_IMAGE_FILE")
+            print("usage: mouse.py PRODUCTION_MODE MAZE_TEXT_FILE MAZE_IMAGE_FILE DISTANCE_LEVEL")
             print("PRODUCTION: 0=development, 1=production")
             print("in development file paths are based off the local directory")
             print("in production file paths are based off /home/core/code/mazeFiles")
+            print("DISTANCE_LEVEL: 0=150m, 1=400m, 2=1500m")
             return
         production=int(sys.argv[1])
         text_file=sys.argv[2]
         image_file=sys.argv[3]
+        distance=int(sys.argv[4])
 
         #Create the global map we will use to check for movement paths
         our_map = mapGlobal.mapGlobal(33,33)
@@ -45,7 +47,7 @@ class globalProgram:
         mouse4=mouseNodeServer.mouse(31,31, 0,our_map,4)
 
         #startup core
-        core=coreStartup.coreStartupObj(production,0,image_file)
+        core=coreStartup.coreStartupObj(production,0,image_file,distance)
         core.start()
 
         #set up a socket and listen for mice movement requests

@@ -18,9 +18,14 @@ class coreStartupObj(threading.Thread):
         if self.production==1:
             if self.step==0:
                 print("Starting core...")
-                core2=coreStartup.coreStartupObj(self.production,self.step+1,self.image_file)
+                core2=coreStartup.coreStartupObj(self.production,self.step+1,self.image_file,self.distance)
                 core2.start()
-                call("core-gui /home/core/code/coreConfig/default.xml", shell=True)
+                if self.distance==0:
+                    call("core-gui /home/core/code/coreConfig/default_short.xml", shell=True)
+                elif self.distance==1:
+                    call("core-gui /home/core/code/coreConfig/default_med.xml", shell=True)
+                else:
+                    call("core-gui /home/core/code/coreConfig/default_long.xml", shell=True)
             else:
                 sleep(self.COMMAND_DELAY)
                 print("Setting background...")
@@ -46,10 +51,11 @@ class coreStartupObj(threading.Thread):
 
 
 
-    def __init__(self,production,step,image_file):
+    def __init__(self,production,step,image_file,distance):
         threading.Thread.__init__(self)
         self.production=production
         self.step=step
+        self.distance=distance
         self.image_file=image_file
 
     

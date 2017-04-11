@@ -9,6 +9,7 @@ class mouseGlobalConnector:
 
     development_ip="127.0.0.1"
     production_ip="172.16.0.254"
+    MAP_SIZE=1089 #33x33
 
     #This function will get the mouse's position from the global map
     #it is usually only used when the program starts but can be called
@@ -62,6 +63,22 @@ class mouseGlobalConnector:
         success_str=self.fetchLine()
         success=int(success_str)
         return success
+
+
+    def sendMap(self,typeList,optionList):
+        buffer=''
+
+        #Convert typeList to buffer
+        for x in range(0,self.MAP_SIZE):
+            buffer+=str(typeList[x])
+
+        #Convert optionList to buffer
+        for x in range(0,self.MAP_SIZE):
+            buffer+=str(optionList[x])
+
+        self.socket.send("map\n".encode())
+        self.socket.send((buffer+"\n").encode())
+
 
     #This function fetches the next line of communication
     # from the global map program

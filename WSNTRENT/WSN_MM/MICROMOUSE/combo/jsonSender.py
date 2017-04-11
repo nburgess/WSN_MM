@@ -5,17 +5,16 @@ import mapGlobal
 import mouseNode
 from time import sleep
 from socket import *
-import simplejson as json
 import io
-import urllib2
 import urllib
+import mouseGlobalConnector
 
 # This class is in charge of broadcasting the map to all other mice in the maze
 class jsonSender(threading.Thread):
 
     MYPORT = 50000 #port that we will send data to
     MAP_SIZE=1089 #33 x 33
-    WAIT_TO_SEND=2 #time delay between each map send
+    WAIT_TO_SEND=60 #time delay between each map send
 
     #This function broadcasts a copy of the map every WAIT_TO_SEND seconds
     def run(self):
@@ -33,21 +32,23 @@ class jsonSender(threading.Thread):
             nodeList=self.mouse.generate_sendlist()
             typeList=nodeList[0]
             optionList=nodeList[1]
+            self.clientConnector.sendMap(typeList,optionList)
+            
             #write JSON conversion 
-            sleep(self.WAIT_TO_SEND)
-	    with io.open('jsondata.txt', 'w', encoding='utf-8') as f:
-             	f.write(json.dumps(nodeList, ensure_ascii=False))
+            #sleep(self.WAIT_TO_SEND)
+	    #with io.open('jsondata.txt', 'w', encoding='utf-8') as f:
+             	#f.write(json.dumps(nodeList, ensure_ascii=False))
 
 	   	#a = json.dumps(nodeList, indent=4, sort_keys=True, separators=(',', ': '), ensure_ascii=False)
 		#f.write(unicode(a))
 
-	    url = 'http://173.198.236.83:3030/uploadMap.php'
-	    data = urllib.urlencode({'mouse': self.mouse.getNumber(), 'types': typeList, 'options': optionList})
-	    req = urllib2.Request(url, data)
+	    #url = 'http://173.198.236.83:3030/uploadMap.php'
+	    #data = urllib.urlencode({'mouse': self.mouse.getNumber(), 'types': typeList, 'options': optionList})
+	    #req = urllib2.Request(url, data)
 	    #req = urllib2.urlopen(url=url, data=data)
-	    response = urllib2.urlopen(req)
-	    the_page = response.read()
-	    print the_page
+	    #response = urllib2.urlopen(req)
+	    #the_page = response.read()
+	    #print the_page
 	    
  
 	    #with io.open('jsondata.txt', 'w', encoding='utf-8') as outfile:
@@ -56,9 +57,10 @@ class jsonSender(threading.Thread):
 
 	    
 
-    def __init__(self,mouse):
+    def __init__(self,mouse,clientConnector):
         threading.Thread.__init__(self)
         self.mouse=mouse
+        self.clientConnector=clientConnector
     
 
         #self.s = socket(AF_INET, SOCK_DGRAM)
