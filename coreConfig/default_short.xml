@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scenario>
+  <NetworkPlan>
+    <NetworkDefinition id="6" name="wlan6" type="WlanNode">
+      <model name="basic_range" type="wireless">
+        <range>150</range>
+        <bandwidth>54000000</bandwidth>
+        <jitter>0</jitter>
+        <delay>20000</delay>
+        <error>0</error>
+      </model>
+    </NetworkDefinition>
+    <Node id="1" name="n1" type="mdr">
+      <interface name="eth0" net="wlan6">
+        <address type="mac">00:00:00:aa:00:04</address>
+        <address>10.0.0.1/24</address>
+        <address>2001::1/128</address>
+      </interface>
+    </Node>
+    <Node id="2" name="n2" type="mdr">
+      <interface name="eth0" net="wlan6">
+        <address type="mac">00:00:00:aa:00:05</address>
+        <address>10.0.0.2/24</address>
+        <address>2001::2/128</address>
+      </interface>
+    </Node>
+    <Node id="3" name="n3" type="mdr">
+      <interface name="eth0" net="wlan6">
+        <address type="mac">00:00:00:aa:00:06</address>
+        <address>10.0.0.3/24</address>
+        <address>2001::3/128</address>
+      </interface>
+    </Node>
+    <Node id="4" name="n4" type="mdr">
+      <interface name="eth0" net="wlan6">
+        <address type="mac">00:00:00:aa:00:07</address>
+        <address>10.0.0.4/24</address>
+        <address>2001::4/128</address>
+      </interface>
+    </Node>
+    <Node id="5" name="n5" type="router"/>
+  </NetworkPlan>
+  <MotionPlan>
+    <origin alt="2.0" lat="47.5791667" lon="-122.132322" scale100="150.0"/>
+    <Node name="wlan6">
+      <motion type="stationary">
+        <point>520,587</point>
+      </motion>
+    </Node>
+    <Node name="n1">
+      <motion type="stationary">
+        <point>679,60</point>
+      </motion>
+    </Node>
+    <Node name="n2">
+      <motion type="stationary">
+        <point>784,152</point>
+      </motion>
+    </Node>
+    <Node name="n3">
+      <motion type="stationary">
+        <point>706,375</point>
+      </motion>
+    </Node>
+    <Node name="n4">
+      <motion type="stationary">
+        <point>808,598</point>
+      </motion>
+    </Node>
+    <Node name="n5">
+      <motion type="stationary">
+        <point>184,174</point>
+      </motion>
+    </Node>
+  </MotionPlan>
+  <ServicePlan>
+    <Node type="mdr">
+      <Service name="zebra"/>
+      <Service name="OSPFv3MDR"/>
+      <Service name="vtysh"/>
+      <Service name="IPForward"/>
+    </Node>
+    <Node type="router">
+      <Service name="zebra"/>
+      <Service name="OSPFv2"/>
+      <Service name="OSPFv3"/>
+      <Service name="vtysh"/>
+      <Service name="IPForward"/>
+    </Node>
+  </ServicePlan>
+  <CoreMetaData>
+    <SessionOptions>
+      <param name="controlnet">172.16.0.0/24</param>
+    </SessionOptions>
+    <MetaData>
+      <param name="global_options">interface_names=no ip_addresses=yes ipv6_addresses=yes node_labels=yes link_labels=yes show_api=no background_images=no annotations=yes grid=yes traffic_start=0</param>
+      <param name="canvas c1">{name {Canvas1}}</param>
+    </MetaData>
+  </CoreMetaData>
+</Scenario>
