@@ -1,13 +1,43 @@
 <?php
 	$con = mysqli_connect("localhost","MM","mm","MM");
 	
-	$map_datas4=mysqli_query($con,"SELECT line FROM network_data") or die("ERROR");
+	$network_datas=mysqli_query($con,"SELECT line FROM network_data ORDER BY line_id DESC LIMIT 10") or die("ERROR");
+	$network_datas_all=mysqli_query($con,"SELECT line FROM network_data ORDER BY line_id DESC") or die("ERROR");
+
+	$packets1=0;
+	$packets2=0;
+	$packets3=0;
+	$packets4=0;
+
+	while ($network_data=mysqli_fetch_array($network_datas_all))
+	{
+		$parts=explode(" ",$network_data[0]);
+		if ($parts[0]=="010.000.000.001")
+		{
+			$packets1+=intval($parts[6]);
+		}
+		else if ($parts[0]=="010.000.000.002")
+		{
+			$packets2+=intval($parts[6]);
+		}
+		else if ($parts[0]=="010.000.000.003")
+		{
+			$packets3+=intval($parts[6]);
+		}
+		else if ($parts[0]=="010.000.000.004")
+		{
+			$packets4+=intval($parts[6]);
+		}
+
+	}
 
 	
 	$map_datas1=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=1 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");
 	$map_datas2=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=2 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");
 	$map_datas3=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=3 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");
 	$map_datas4=mysqli_query($con,"SELECT option_col,type_col,x_pos,y_pos FROM mouse_maps WHERE mouse_id=4 ORDER BY y_pos ASC,x_pos ASC") or die("ERROR");
+	
+	
 ?>
 
 <html>
@@ -32,7 +62,16 @@
           </ul>
           <h1 align="center">Virtual Micromouse Project</h1>
           <h3 align="center">Trent Walls | Nicolas Burgess | Vivek Patel | Brian Lee</h3>
+			<h1>Network Data</h1>
+			<?php
+				while ($network_data=mysqli_fetch_array($network_datas))
+				{
+					echo $network_data[0].'<br>';
+				}
+			?>
+			
 			<h1>Mouse 1</h1>
+			<h3>Packets Sent: <?php echo $packets1;?></h3>
 			<?php
 			for ($y=0;$y<=32;$y++)
 			{
@@ -74,6 +113,7 @@
 			?>
 			<br><br>
     		<h1>Mouse 2</h1>
+    		<h3>Packets Sent: <?php echo $packets2;?></h3>
 			<?php
 			for ($y=0;$y<=32;$y++)
 			{
@@ -115,6 +155,8 @@
 			?>
 			<br><br>
 			<h1>Mouse 3</h1>
+			<h3>Packets Sent: <?php echo $packets3;?></h3>
+
 			<?php
 			for ($y=0;$y<=32;$y++)
 			{
@@ -156,6 +198,8 @@
 			?>
 			<br><br>
 			<h1>Mouse 4</h1>
+			<h3>Packets Sent: <?php echo $packets4;?></h3>
+
 			<?php
 			for ($y=0;$y<=32;$y++)
 			{
