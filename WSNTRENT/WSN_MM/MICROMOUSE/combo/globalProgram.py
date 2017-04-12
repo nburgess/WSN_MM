@@ -6,6 +6,7 @@ import globalClientThread
 import globalProgram
 import mouseNodeServer
 import coreStartup
+import networkSender
 
 #The global program is in charge of managing the globalMap object and
 # listening for requests from the mice for movement informaiton
@@ -49,6 +50,10 @@ class globalProgram:
         #startup core
         core=coreStartup.coreStartupObj(production,0,image_file,distance)
         core.start()
+
+        #start looking for network data
+        network=networkSender.networkSender()
+        network.start()
 
         #set up a socket and listen for mice movement requests
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
