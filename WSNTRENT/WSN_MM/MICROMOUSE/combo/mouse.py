@@ -33,9 +33,9 @@ def main():
     jsonObj=jsonSender.jsonSender(mouse,global_map)
     jsonObj.start()
 
-     #start looking for network data
-     network=networkSender.networkSender(mouse.getNumber(),global_map)
-     network.start()
+    #start looking for network data
+    network=networkSender.networkSender(mouse.getNumber(),global_map)
+    network.start()
 
     #set up the broadcast connection for the map
     print("create broadcasters")
