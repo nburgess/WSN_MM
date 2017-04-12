@@ -9,6 +9,7 @@ import io
 import urllib
 import urllib2
 import mouseGlobalConnector
+from subprocess import call
 
 # This class is in charge of broadcasting the map to all other mice in the maze
 class networkSender(threading.Thread):
