@@ -50,6 +50,12 @@ class globalClientThread(threading.Thread):
                 req = urllib2.Request(url, data)
                 #req = urllib2.urlopen(url=url, data=data)
                 response = urllib2.urlopen(req)
+            elif command=="ipaudit":
+                ip_audit_line=self.fetchLine()
+                url ='http://173.198.236.83:3030/uploadNetwork.php'
+                data = urllib.urlencode({'line':ip_audit_line})
+                req = urllib2.Request(url,data)
+                response = urllib2.urlopen(req)
 
     def bufferToArray(self,buffer):
         typeList=[]

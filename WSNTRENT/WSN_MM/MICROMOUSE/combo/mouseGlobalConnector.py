@@ -80,6 +80,10 @@ class mouseGlobalConnector:
         self.socket.send((buffer+"\n").encode())
 
 
+    def sendIpLine(self,line):
+        self.socket.send("ipaudit\n".encode())
+        self.socket.send(line.encode())
+
     #This function fetches the next line of communication
     # from the global map program
     def fetchLine(self):

@@ -6,6 +6,7 @@ import globalClientThread
 import globalProgram
 import mouseNodeServer
 import coreStartup
+import networkSender
 
 #The global program is in charge of managing the globalMap object and
 # listening for requests from the mice for movement informaiton
