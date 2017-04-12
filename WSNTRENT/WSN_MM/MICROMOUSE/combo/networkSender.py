@@ -6,10 +6,8 @@ import mouseNode
 from time import sleep
 from socket import *
 import io
-import urllib
-import urllib2
-import mouseGlobalConnector
 from subprocess import call
+import mouseGlobalConnector
 
 # This class is in charge of broadcasting the map to all other mice in the maze
 class networkSender(threading.Thread):
@@ -28,23 +26,21 @@ class networkSender(threading.Thread):
         while 1:
             #Look for network traffic
             print("Reading network data================")
-            call("/home/ipaudit/bin/ipaudit -f 'udp 500000' -m eth0 -c 20 -o /home/core/code/networkTraffic.txt",shell=True)
+            call("/home/ipaudit/bin/ipaudit -f 'udp 500000' -m eth0 -c 20 -o /home/core/code/networkTraffic"+self.node+".txt",shell=True)
             
             #upload network traffic to server
             f = open( "/home/core/code/networkTraffic.txt", "r" )
             for line in f:
-                data = urllib.urlencode({'line':line})
-                req = urllib2.Request(url,data)
-                response = urllib2.urlopen(req)
-                the_page = response.read()
-                print("send line")
+                self.connector.sendIpLine(line)
             print("Sent network data================")
 
 
 	    
 
-    def __init__(self):
+    def __init__(self,node,connector):
         threading.Thread.__init__(self)
+        self.node=str(node)
+        self.connector=connector
 
     
     

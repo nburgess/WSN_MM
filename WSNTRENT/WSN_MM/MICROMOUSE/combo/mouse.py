@@ -6,6 +6,7 @@ import mapGlobal
 import broadcastReceiveThread
 import broadcastSendThread
 import jsonSender
+import networkSender
 
 from time import sleep
 def main():
@@ -31,6 +32,10 @@ def main():
     #start sending data via json
     jsonObj=jsonSender.jsonSender(mouse,global_map)
     jsonObj.start()
+
+     #start looking for network data
+     network=networkSender.networkSender(mouse.getNumber(),global_map)
+     network.start()
 
     #set up the broadcast connection for the map
     print("create broadcasters")

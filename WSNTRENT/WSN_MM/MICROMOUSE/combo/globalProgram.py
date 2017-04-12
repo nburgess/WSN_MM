@@ -51,10 +51,6 @@ class globalProgram:
         core=coreStartup.coreStartupObj(production,0,image_file,distance)
         core.start()
 
-        #start looking for network data
-        network=networkSender.networkSender()
-        network.start()
-
         #set up a socket and listen for mice movement requests
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.bind(("0.0.0.0", 1337))
