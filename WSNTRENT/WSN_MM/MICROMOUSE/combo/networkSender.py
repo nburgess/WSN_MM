@@ -29,7 +29,7 @@ class networkSender(threading.Thread):
             call("/home/ipaudit/bin/ipaudit -f 'udp 500000' -m eth0 -c 20 -o /home/core/code/networkTraffic"+self.node+".txt",shell=True)
             
             #upload network traffic to server
-            f = open( "/home/core/code/networkTraffic.txt", "r" )
+            f = open( "/home/core/code/networkTraffic"+self.node+".txt", "r" )
             for line in f:
                 self.connector.sendIpLine(line)
             print("Sent network data================")
