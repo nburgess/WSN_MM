@@ -62,6 +62,7 @@
           </ul>
           <h1 align="center">Virtual Micromouse Project</h1>
           <h3 align="center">Trent Walls | Nicolas Burgess | Vivek Patel | Brian Lee</h3>
+
 			<h1>Network Data</h1>
 			<?php
 				while ($network_data=mysqli_fetch_array($network_datas))
@@ -70,6 +71,7 @@
 				}
 			?>
 			
+
 			<h1>Mouse 1</h1>
 			<h3>Packets Sent: <?php echo $packets1;?></h3>
 			<?php
