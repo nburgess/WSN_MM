@@ -26,8 +26,8 @@ class networkSender(threading.Thread):
         print("Started Network Thread")
 
         while 1:
-            #Look for network traffice
-            print("Reading network data")
+            #Look for network traffic
+            print("Reading network data================")
             call("/home/ipaudit/bin/ipaudit -f 'udp 500000' -m eth0 -c 50 -o /home/core/code/networkTraffic.txt",shell=True)
             
             #upload network traffic to server
@@ -37,6 +37,8 @@ class networkSender(threading.Thread):
                 req = urllib2.Request(url,data)
                 response = urllib2.urlopen(req)
                 the_page = response.read()
+                print("send line")
+            print("Sent network data================")
 
 
 	    
