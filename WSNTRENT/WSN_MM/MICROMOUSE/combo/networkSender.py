@@ -28,7 +28,7 @@ class networkSender(threading.Thread):
         while 1:
             #Look for network traffic
             print("Reading network data================")
-            call("/home/ipaudit/bin/ipaudit -f 'udp 500000' -m eth0 -c 50 -o /home/core/code/networkTraffic.txt",shell=True)
+            call("/home/ipaudit/bin/ipaudit -f 'udp 500000' -m eth0 -c 20 -o /home/core/code/networkTraffic.txt",shell=True)
             
             #upload network traffic to server
             f = open( "/home/core/code/networkTraffic.txt", "r" )
